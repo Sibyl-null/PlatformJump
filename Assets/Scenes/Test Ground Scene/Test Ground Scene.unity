@@ -19005,6 +19005,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1467496967575292946, guid: 6bd7ab43aa2018f4d88842da292dec60, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1467496967588288344, guid: 6bd7ab43aa2018f4d88842da292dec60, type: 3}
       propertyPath: m_RaycastPadding.x
       value: 0
@@ -19019,7 +19023,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1467496969243288920, guid: 6bd7ab43aa2018f4d88842da292dec60, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1467496969243288925, guid: 6bd7ab43aa2018f4d88842da292dec60, type: 3}
       propertyPath: m_Pivot.x
