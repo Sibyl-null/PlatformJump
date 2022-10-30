@@ -6,6 +6,6 @@ public class GameState_Game : GameState
 {
     public override void Enter()
     {
-        SceneManager.LoadScene("Test Ground Scene");
+        SceneManager.LoadSceneAsync("Test Ground Scene");
     }
 }
