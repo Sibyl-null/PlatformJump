@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b66d36c6507f9e49a8c4576441f2db0, type: 3}
-  m_Name: GameState_Game
+  m_Script: {fileID: 11500000, guid: dd8d2d98a7784aa4ca7cc2dc62788974, type: 3}
+  m_Name: PlayerState_Win
   m_EditorClassIdentifier: 
-  playerWinEvent: {fileID: 11400000, guid: 1fe806fa6c3644f45ba2fe7f18322195, type: 2}
-  playerDefeatedEvent: {fileID: 11400000, guid: 54f98ae891f2d444ea8d455e56c9e11a, type: 2}
+  transitionDuration: 0.1
+  state: 6

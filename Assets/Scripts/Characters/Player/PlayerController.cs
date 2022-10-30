@@ -74,6 +74,9 @@ public class PlayerController : MonoBehaviour
     private void LevelWin()
     {
         Victory = true;
+        
+        PlayerStateMachine sm = GetComponent<PlayerStateMachine>();
+        sm.SwitchState(sm.GetState<PlayerState_Win>());
     }
 
     public void OnDefeated()

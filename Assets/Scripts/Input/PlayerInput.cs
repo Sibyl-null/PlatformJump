@@ -41,7 +41,7 @@ public class PlayerInput : MonoBehaviour
 
     public void DisableGamePlayerInputs()
     {
-        _playerInputAction.Gameplay.Enable();
+        _playerInputAction.Gameplay.Disable();
     }
 
     public void SetJumpInputBufferTimer()   // 开启跳跃缓冲计时
