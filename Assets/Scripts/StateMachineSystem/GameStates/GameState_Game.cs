@@ -8,11 +8,12 @@ public class GameState_Game : GameState
     [SerializeField] private EventCenterVoid playerWinEvent;   // 玩家成功事件
     [SerializeField] private EventCenterVoid playerDefeatedEvent;   // 玩家失败事件
 
-    [SerializeField] private EventCenterVoid comeBackEvent;   // 返回开始界面
+    [SerializeField] private EventCenterVoid comeBackEvent;   // 返回开始界面事件
 
     public override void Enter()
     {
         playerWinEvent.AddEventListener(OnPlayerWinEvent);
+        comeBackEvent.AddEventListener(OnComeBack);
         
         SceneManager.LoadSceneAsync(GlobalString.GAME_SCENE);
 
@@ -34,6 +35,7 @@ public class GameState_Game : GameState
     public override void Exit()
     {
         playerDefeatedEvent.RemoveEventListener(OnPlayerWinEvent);
+        comeBackEvent.RemoveEventListener(OnComeBack);
     }
 
     private void OnPlayerWinEvent()
@@ -41,5 +43,11 @@ public class GameState_Game : GameState
         VictoryPanel victoryPanel = UIManager.Instance.ShowPanel<VictoryPanel>(GlobalString.VICTORY_PANEL);
         victoryPanel.InitTime(UIManager.Instance.GetPanel<ClearTimerPanel>(GlobalString.CLEARTIMER_PANEL).RecordTime);
         UIManager.Instance.DestroyPanel(GlobalString.CLEARTIMER_PANEL);
+    }
+
+    private void OnComeBack()
+    {
+        UIManager.Instance.DestroyAllPanel();
+        stateMachine.SwitchState(stateMachine.GetState<GameState_Start>());
     }
 }

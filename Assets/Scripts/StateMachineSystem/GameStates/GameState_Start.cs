@@ -1,6 +1,7 @@
 using System;
 using NetWork;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [CreateAssetMenu(menuName = "Data/StateMachine/GameState/Start", fileName = "GameState_Start")]
 public class GameState_Start : GameState
@@ -13,6 +14,13 @@ public class GameState_Start : GameState
     public override void Enter()
     {
         enterGameEvent.AddEventListener(EnterGameEvent);
+
+        // 如果不在开始场景就切场景
+        Scene startScene = SceneManager.GetSceneByName(GlobalString.START_SCENE);
+        if (startScene != SceneManager.GetActiveScene())
+        {
+            SceneManager.LoadSceneAsync(GlobalString.START_SCENE);
+        }
         
         UIManager.Instance.ShowPanel<StartPanel>(GlobalString.START_PANEL);
         // 进入游戏尝试网络连接

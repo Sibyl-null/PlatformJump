@@ -983,6 +983,7 @@ MonoBehaviour:
   btnBack: {fileID: 6687217615576953774}
   inputName: {fileID: 1926065034}
   txtTime: {fileID: 6687217615094762389}
+  comeBackEvent: {fileID: 11400000, guid: ded28553ec072af42a17cfe738605279, type: 2}
 --- !u!1 &6687217616792486242
 GameObject:
   m_ObjectHideFlags: 0

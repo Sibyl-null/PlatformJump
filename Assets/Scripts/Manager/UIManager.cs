@@ -82,4 +82,16 @@ public class UIManager : MonoSingleton<UIManager>
             return default(T);
         }
     }
+
+    /// <summary>
+    /// 清空当前所有panel
+    /// </summary>
+    public void DestroyAllPanel()
+    {
+        foreach (BasePanel panel in _panelDic.Values)
+        {
+            Destroy(panel.gameObject);
+        }
+        _panelDic.Clear();
+    }
 }

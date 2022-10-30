@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.UI;
 
 public class VictoryPanel : BasePanel
@@ -6,6 +7,8 @@ public class VictoryPanel : BasePanel
     public Button btnBack;
     public InputField inputName;
     public Text txtTime;
+    
+    [SerializeField] private EventCenterVoid comeBackEvent;   // 返回开始界面事件
 
     private void Start()
     {
@@ -16,7 +19,7 @@ public class VictoryPanel : BasePanel
         
         btnBack.onClick.AddListener(() =>
         {
-            
+            comeBackEvent.EventTrigger();
         });
     }
 

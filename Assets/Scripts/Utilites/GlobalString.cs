@@ -14,6 +14,7 @@ public static class GlobalString
     public const string Player_CoyoteTime = "Unity_Chan_Run";
 
     // Scene
+    public const string START_SCENE = "StartScene";
     public const string GAME_SCENE = "Test Ground Scene";
     
     // UI
