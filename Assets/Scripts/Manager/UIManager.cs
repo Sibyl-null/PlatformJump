@@ -8,11 +8,13 @@ public class UIManager : MonoSingleton<UIManager>
 
     private Dictionary<string, BasePanel> _panelDic = new Dictionary<string, BasePanel>();
 
-    private async void Awake()
+    private bool _hasInit = false;
+
+    public void Init()
     {
-        ResourceRequest request = ResManager.Instance.LoadAsync<GameObject>(GlobalString.UICANVAS_PREFAB);
-        await request;
-        _canvasTrans = Instantiate(request.asset as GameObject).transform;
+        _canvasTrans = Instantiate(ResManager.Instance.Load<GameObject>(GlobalString.UICANVAS_PREFAB)).transform;
+        DontDestroyOnLoad(_canvasTrans.gameObject);
+        _hasInit = true;
     }
 
     /// <summary>
@@ -21,15 +23,15 @@ public class UIManager : MonoSingleton<UIManager>
     /// <param name="panelPath"> panel资源路径 </param>
     public T ShowPanel<T>(string panelPath) where T : BasePanel
     {
+        if (!_hasInit) Init();
         if (_panelDic.TryGetValue(panelPath, out BasePanel panel))
         {
             if (panel.gameObject.activeSelf == false) panel.gameObject.SetActive(true);
             return panel as T;
         }
 
-        GameObject obj = ResManager.Instance.Load<GameObject>(panelPath);
-        panel = Instantiate(obj).GetComponent<T>();
-        obj.transform.SetParent(_canvasTrans);
+        GameObject obj = Instantiate(ResManager.Instance.Load<GameObject>(panelPath), _canvasTrans, false);
+        panel = obj.GetComponent<T>();
         _panelDic.Add(panelPath, panel);
         
         return (T)panel;
@@ -40,6 +42,7 @@ public class UIManager : MonoSingleton<UIManager>
     /// </summary>
     public void HidePanel(string panelPath)
     {
+        if (!_hasInit) Init();
         if (_panelDic.TryGetValue(panelPath, out BasePanel panel))
         {
             panel.gameObject.SetActive(false);
@@ -53,6 +56,7 @@ public class UIManager : MonoSingleton<UIManager>
     /// </summary>
     public void DestroyPanel(string panelPath)
     {
+        if (!_hasInit) Init();
         if (_panelDic.TryGetValue(panelPath, out BasePanel panel))
         {
             Destroy(panel.gameObject);

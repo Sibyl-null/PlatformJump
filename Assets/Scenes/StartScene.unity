@@ -238,6 +238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _states:
   - {fileID: 11400000, guid: 929ac4aa13aceb748b48a9fbd1d2c09f, type: 2}
+  - {fileID: 11400000, guid: 0e9f832c82af1024d805415da5cbb2bb, type: 2}
 --- !u!4 &908670011
 Transform:
   m_ObjectHideFlags: 0

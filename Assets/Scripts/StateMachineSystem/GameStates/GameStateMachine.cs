@@ -10,10 +10,11 @@ public class GameStateMachine : StateMachine
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
-        
+
         stateDic = new Dictionary<Type, IState>(_states.Length);
         foreach (GameState gameState in _states)
         {
+            gameState.Init(this);
             stateDic.Add(gameState.GetType(), gameState);
         }
     }

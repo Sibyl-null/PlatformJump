@@ -1,6 +1,7 @@
 
 public static class GlobalString
 {
+    // PlayerState_Clip
     public const string Player_Idle = "Unity_Chan_Idle";
     public const string Player_Float = "Unity_Chan_Float";
     public const string Player_Jump = "Unity_Chan_Jump";
@@ -12,5 +13,7 @@ public static class GlobalString
     public const string Player_AirJump = "Unity_Chan_Jump";
     public const string Player_CoyoteTime = "Unity_Chan_Run";
 
+    // UI
     public const string UICANVAS_PREFAB = "UI/UICanvas";
+    public const string START_PANEL = "UI/Panel/StartPanel";
 }
