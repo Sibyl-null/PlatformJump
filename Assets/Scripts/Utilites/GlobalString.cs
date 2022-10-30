@@ -11,4 +11,6 @@ public static class GlobalString
     public const string Player_Die = "Unity_Chan_Die";
     public const string Player_AirJump = "Unity_Chan_Jump";
     public const string Player_CoyoteTime = "Unity_Chan_Run";
+
+    public const string UICANVAS_PREFAB = "UI/UICanvas";
 }
