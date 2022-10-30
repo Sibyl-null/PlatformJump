@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerWinEvent: {fileID: 11400000, guid: 1fe806fa6c3644f45ba2fe7f18322195, type: 2}
   playerDefeatedEvent: {fileID: 11400000, guid: 54f98ae891f2d444ea8d455e56c9e11a, type: 2}
+  comeBackEvent: {fileID: 11400000, guid: ded28553ec072af42a17cfe738605279, type: 2}

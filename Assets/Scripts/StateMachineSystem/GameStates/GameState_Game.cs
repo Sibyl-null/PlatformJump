@@ -13,6 +13,7 @@ public class GameState_Game : GameState
     public override void Enter()
     {
         playerWinEvent.AddEventListener(OnPlayerWinEvent);
+        playerDefeatedEvent.AddEventListener(OnPlayerDefeatedEvent);
         comeBackEvent.AddEventListener(OnComeBack);
         
         SceneManager.LoadSceneAsync(GlobalString.GAME_SCENE);
@@ -35,6 +36,7 @@ public class GameState_Game : GameState
     public override void Exit()
     {
         playerDefeatedEvent.RemoveEventListener(OnPlayerWinEvent);
+        playerDefeatedEvent.RemoveEventListener(OnPlayerDefeatedEvent);
         comeBackEvent.RemoveEventListener(OnComeBack);
     }
 
@@ -43,6 +45,12 @@ public class GameState_Game : GameState
         VictoryPanel victoryPanel = UIManager.Instance.ShowPanel<VictoryPanel>(GlobalString.VICTORY_PANEL);
         victoryPanel.InitTime(UIManager.Instance.GetPanel<ClearTimerPanel>(GlobalString.CLEARTIMER_PANEL).RecordTime);
         UIManager.Instance.DestroyPanel(GlobalString.CLEARTIMER_PANEL);
+    }
+
+    private void OnPlayerDefeatedEvent()
+    {
+        UIManager.Instance.DestroyPanel(GlobalString.CLEARTIMER_PANEL);
+        UIManager.Instance.ShowPanel<DefeatPanel>(GlobalString.DEFEAT_PANEL);
     }
 
     private void OnComeBack()

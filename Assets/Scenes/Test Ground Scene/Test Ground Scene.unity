@@ -1603,6 +1603,7 @@ MonoBehaviour:
   groundedDetector: {fileID: 747501542}
   walledDetector: {fileID: 589452617}
   playerWinEvent: {fileID: 11400000, guid: 1fe806fa6c3644f45ba2fe7f18322195, type: 2}
+  playerDefeatedEvent: {fileID: 11400000, guid: 54f98ae891f2d444ea8d455e56c9e11a, type: 2}
 --- !u!114 &139370792
 MonoBehaviour:
   m_ObjectHideFlags: 0
