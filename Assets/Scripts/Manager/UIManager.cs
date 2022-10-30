@@ -65,4 +65,21 @@ public class UIManager : MonoSingleton<UIManager>
         else
             Debug.LogError("不存在该panel: " + panelPath);
     }
+
+    /// <summary>
+    /// 获取panel
+    /// </summary>
+    public T GetPanel<T>(string panelPath) where T : BasePanel
+    {
+        if (!_hasInit) Init();
+        if (_panelDic.TryGetValue(panelPath, out BasePanel panel))
+        {
+            return panel as T;
+        }
+        else
+        {
+            Debug.LogError("不存在该panel: " + panelPath);
+            return default(T);
+        }
+    }
 }

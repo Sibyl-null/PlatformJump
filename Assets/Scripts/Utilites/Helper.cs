@@ -23,4 +23,9 @@ public class Helper
 
         return "";
     }
+    
+    public static string FormatTime(int num)
+    {
+        return num < 10 ? $"0{num}" : num.ToString();
+    }
 }

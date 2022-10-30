@@ -1,5 +1,3 @@
-using System;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +8,8 @@ public class ClearTimerPanel : BasePanel
     [SerializeField] private EventCenterVoid levelStartEvent;
     private float _nowTime = 0;
     private bool _hasCount = false;
+
+    public float RecordTime => _nowTime;
 
     private void OnEnable()
     {
@@ -25,7 +25,7 @@ public class ClearTimerPanel : BasePanel
             int minute = (int)(_nowTime / 60);
             int second = (int)_nowTime % 60;
 
-            txtTime.text = FormatTime(minute) + ":" + FormatTime(second);
+            txtTime.text = Helper.FormatTime(minute) + ":" + Helper.FormatTime(second);
         }
     }
 
@@ -39,10 +39,5 @@ public class ClearTimerPanel : BasePanel
     private void StartTimeCount()
     {
         _hasCount = true;
-    }
-
-    private string FormatTime(int num)
-    {
-        return num < 10 ? $"0{num}" : num.ToString();
     }
 }
