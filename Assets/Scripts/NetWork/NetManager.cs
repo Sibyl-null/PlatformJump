@@ -119,6 +119,8 @@ namespace NetWork
         {
             if (_socket != null)
             {
+                Send(new QuitMsg());
+                
                 _socket.Shutdown(SocketShutdown.Both);
                 _socket.Disconnect(false);
                 _socket.Close();
@@ -141,6 +143,7 @@ namespace NetWork
         // 处理分包，粘包
         private void HandleReceiveMsg(int receiveNum)
         {
+            Debug.Log("dadada");
             int msgID = 0;
             int msgLength = 0;
             int nowIndex = 0;
