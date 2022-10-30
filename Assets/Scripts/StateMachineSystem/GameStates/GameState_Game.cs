@@ -15,6 +15,7 @@ public class GameState_Game : GameState
         SceneManager.LoadSceneAsync(GlobalString.GAME_SCENE);
 
         UIManager.Instance.ShowPanel<ReadyPanel>(GlobalString.READY_PANEL);
+        UIManager.Instance.ShowPanel<ClearTimerPanel>(GlobalString.CLEARTIMER_PANEL);
     }
 
     public override void LogicUpdate()
@@ -35,6 +36,7 @@ public class GameState_Game : GameState
 
     private void OnPlayerWinEvent()
     {
+        UIManager.Instance.DestroyPanel(GlobalString.CLEARTIMER_PANEL);
         UIManager.Instance.ShowPanel<VictoryPanel>(GlobalString.VICTORY_PANEL);
     }
 }
