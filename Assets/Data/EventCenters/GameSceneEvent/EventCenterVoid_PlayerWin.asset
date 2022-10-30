@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01b555819da2dfa4c8cf5a2de2a409d3, type: 3}
-  m_Name: EventCenterVoid_LevelClear
+  m_Name: EventCenterVoid_PlayerWin
   m_EditorClassIdentifier: 

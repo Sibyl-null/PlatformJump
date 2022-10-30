@@ -20,4 +20,5 @@ public static class GlobalString
     public const string UICANVAS_PREFAB = "UI/UICanvas";
     public const string START_PANEL = "UI/Panel/StartPanel";
     public const string READY_PANEL = "UI/Panel/ReadyPanel";
+    public const string VICTORY_PANEL = "UI/Panel/VictoryPanel";
 }

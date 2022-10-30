@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerGroundedDetector groundedDetector;   //检测地面
     [SerializeField] private PlayerGroundedDetector walledDetector;     //检测墙面
 
-    [SerializeField] private EventCenterVoid eventCenterWin;
+    [SerializeField] private EventCenterVoid playerWinEvent;
 
     public float MoveSpeed => Mathf.Abs(_rigidbody.velocity.x);    //当前移动速度
     public bool IsGrounded => groundedDetector.IsGrounded;   //是否在地面上
@@ -29,12 +29,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        eventCenterWin.AddEventListener(LevelWin);
+        playerWinEvent.AddEventListener(LevelWin);
     }
 
     private void OnDisable()
     {
-        eventCenterWin.RemoveEventListener(LevelWin);
+        playerWinEvent.RemoveEventListener(LevelWin);
     }
 
     private void Start()

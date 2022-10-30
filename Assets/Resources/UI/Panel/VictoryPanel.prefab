@@ -404,7 +404,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6687217616706625348}
   - component: {fileID: 5232851551422036286}
-  - component: {fileID: 4777016813601171940}
+  - component: {fileID: 7949350229046855744}
   m_Layer: 5
   m_Name: VictoryPanel
   m_TagString: Untagged
@@ -456,7 +456,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4777016813601171940
+--- !u!114 &7949350229046855744
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -465,10 +465,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6687217616706625349}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cb2fe19d41fb0a4dbee802eebcf5dbe, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c6211774a0a89a459b989004b28cb26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventCenterWin: {fileID: 11400000, guid: 1fe806fa6c3644f45ba2fe7f18322195, type: 2}
 --- !u!1 &6687217616792486242
 GameObject:
   m_ObjectHideFlags: 0
