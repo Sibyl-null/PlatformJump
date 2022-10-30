@@ -6,6 +6,8 @@ public class GameState_Game : GameState
 {
     public override void Enter()
     {
-        SceneManager.LoadSceneAsync("Test Ground Scene");
+        SceneManager.LoadSceneAsync(GlobalString.GAME_SCENE);
+
+        UIManager.Instance.ShowPanel<ReadyPanel>(GlobalString.READY_PANEL);
     }
 }

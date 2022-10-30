@@ -106,7 +106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2676926185227695967}
   - component: {fileID: 915828201224423515}
-  - component: {fileID: 3082264345258618437}
+  - component: {fileID: 5067504715568199182}
   m_Layer: 5
   m_Name: ReadyPanel
   m_TagString: Untagged
@@ -156,7 +156,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3082264345258618437
+--- !u!114 &5067504715568199182
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2676926185227695964}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a57a49861b26d147934373aebd869ec, type: 3}
+  m_Script: {fileID: 11500000, guid: ace9548996901664cb36b298c7e87847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   eventCenterStartGate: {fileID: 11400000, guid: aa8ab296810cec049b334f278c2beaa8, type: 2}

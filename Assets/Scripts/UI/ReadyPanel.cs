@@ -1,14 +1,13 @@
-using System;
 using UnityEngine;
 
-public class ReadyScreen : MonoBehaviour
+public class ReadyPanel : BasePanel
 {
     [SerializeField] private EventCenterVoid eventCenterStartGate;
 
     public void LevelStart()
     {
         eventCenterStartGate.EventTrigger();
-        GetComponent<Canvas>().enabled = false;
-        GetComponent<Animator>().enabled = false;
+        
+        UIManager.Instance.DestroyPanel(GlobalString.READY_PANEL);
     }
 }

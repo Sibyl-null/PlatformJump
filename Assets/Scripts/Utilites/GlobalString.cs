@@ -13,7 +13,11 @@ public static class GlobalString
     public const string Player_AirJump = "Unity_Chan_Jump";
     public const string Player_CoyoteTime = "Unity_Chan_Run";
 
+    // Scene
+    public const string GAME_SCENE = "Test Ground Scene";
+    
     // UI
     public const string UICANVAS_PREFAB = "UI/UICanvas";
     public const string START_PANEL = "UI/Panel/StartPanel";
+    public const string READY_PANEL = "UI/Panel/ReadyPanel";
 }
