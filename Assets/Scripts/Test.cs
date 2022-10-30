@@ -20,9 +20,4 @@ public class Test : MonoBehaviour
             NetManager.Instance.Send(msg);
         }
     }
-
-    private void OnDestroy()
-    {
-        NetManager.Instance.Close();
-    }
 }

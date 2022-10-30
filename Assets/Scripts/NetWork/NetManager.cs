@@ -85,7 +85,7 @@ namespace NetWork
         }
 
         /// <summary>
-        /// 发送消息
+        /// 发送消息异步
         /// </summary>
         public void Send(BaseMsg msg)
         {
@@ -113,14 +113,36 @@ namespace NetWork
         }
 
         /// <summary>
+        /// 同步发送消息
+        /// </summary>
+        public void SendNoAsync(BaseMsg msg)
+        {
+            if (_socket != null && _socket.Connected)
+            {
+                byte[] bytes = msg.Writing();
+                try
+                {
+                    _socket.Send(bytes);
+                }
+                catch (SocketException e)
+                {
+                    Debug.Log("SendNoAsync failed" + e.Message + " " + e.ErrorCode);
+                    Close();
+                }
+            }
+            else
+            {
+                Close();
+            }
+        }
+
+        /// <summary>
         /// 关闭客户端链接
         /// </summary>
         public void Close()
         {
             if (_socket != null)
             {
-                Send(new QuitMsg());
-                
                 _socket.Shutdown(SocketShutdown.Both);
                 _socket.Disconnect(false);
                 _socket.Close();

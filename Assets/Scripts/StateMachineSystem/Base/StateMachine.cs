@@ -25,9 +25,6 @@ public class StateMachine : MonoBehaviour
     {
         _currentState = state;
         _currentState.Enter();
-#if UNITY_EDITOR
-        Debug.Log("now State is " + _currentState.ToString());
-#endif
     }
 
     /// <summary>
