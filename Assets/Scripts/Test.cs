@@ -14,7 +14,10 @@ public class Test : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            NetManager.Instance.Send("hhhhhh");
+            AddRecordMsg msg = new AddRecordMsg();
+            msg.recordData.name = "acac";
+            msg.recordData.record = 5;
+            NetManager.Instance.Send(msg);
         }
     }
 }

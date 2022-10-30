@@ -1,6 +1,9 @@
+using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace NetWork
@@ -12,6 +15,12 @@ namespace NetWork
         private byte[] _cacheBytes = new byte[1024];
         private int _cacheNum = 0;
 
+        private Queue<BaseMsg> _receiveQueue = new Queue<BaseMsg>();
+        
+        //发送心跳消息的间隔时间
+        private double SEND_HEART_MSG_TIME = 5;
+        private HeartMsg hearMsg = new HeartMsg();
+        
         private NetManager(){}
         
         /// <summary>
@@ -39,6 +48,9 @@ namespace NetWork
             {
                 Debug.Log("connect success");
                 
+                SendHeartMsgAsync().Forget();    //开始发送心跳消息
+                MsgHandleAsync().Forget();    //开始分帧处理消息
+                
                 // 开始接受消息
                 SocketAsyncEventArgs receiveArgs = new SocketAsyncEventArgs();
                 receiveArgs.SetBuffer(_cacheBytes, 0, _cacheBytes.Length);
@@ -56,12 +68,14 @@ namespace NetWork
         {
             if (args.SocketError == SocketError.Success)
             {
-                Debug.Log(Encoding.UTF8.GetString(args.Buffer, 0, args.BytesTransferred));
-                
+                HandleReceiveMsg(args.BytesTransferred);
+
                 // 继续接受消息
-                args.SetBuffer(0, args.Buffer.Length);
+                args.SetBuffer(_cacheNum, args.Buffer.Length - _cacheNum);
                 if (_socket != null && _socket.Connected)
                     _socket.ReceiveAsync(args);
+                else
+                    Close();
             }
             else
             {
@@ -73,11 +87,11 @@ namespace NetWork
         /// <summary>
         /// 发送消息
         /// </summary>
-        public void Send(string str)
+        public void Send(BaseMsg msg)
         {
             if (_socket != null && _socket.Connected)
             {
-                byte[] bytes = Encoding.UTF8.GetBytes(str);
+                byte[] bytes = msg.Writing();
 
                 SocketAsyncEventArgs sendArgs = new SocketAsyncEventArgs();
                 sendArgs.SetBuffer(bytes, 0, bytes.Length);
@@ -109,6 +123,97 @@ namespace NetWork
                 _socket.Disconnect(false);
                 _socket.Close();
                 _socket = null;
+            }
+        }
+
+        /// <summary>
+        /// 定时给服务端发送心跳消息
+        /// </summary>
+        private async UniTask SendHeartMsgAsync()
+        {
+            while (_socket != null && _socket.Connected)
+            {
+                Send(hearMsg);
+                await UniTask.Delay(TimeSpan.FromSeconds(SEND_HEART_MSG_TIME));
+            }
+        }
+        
+        // 处理分包，粘包
+        private void HandleReceiveMsg(int receiveNum)
+        {
+            int msgID = 0;
+            int msgLength = 0;
+            int nowIndex = 0;
+
+            _cacheNum += receiveNum;
+
+            while (true)
+            {
+                msgLength = -1;
+                
+                if (_cacheNum - nowIndex >= 8)  //处理消息头
+                {
+                    msgID = BitConverter.ToInt32(_cacheBytes, nowIndex);
+                    nowIndex += 4;
+                    
+                    msgLength = BitConverter.ToInt32(_cacheBytes, nowIndex);
+                    nowIndex += 4;
+                }
+
+                if (_cacheNum - nowIndex >= msgLength && msgLength != -1)
+                {
+                    //解析消息体
+                    BaseMsg baseMsg = MsgBytesHandle(msgID, nowIndex);
+                    
+                    if (baseMsg != null) _receiveQueue.Enqueue(baseMsg);
+                    
+                    nowIndex += msgLength;
+                    if (nowIndex == _cacheNum)
+                    {
+                        _cacheNum = 0;
+                        break;
+                    }
+                }
+                else
+                {
+                    if (msgLength != -1) nowIndex -= 8;
+                    Array.Copy(_cacheBytes, nowIndex, _cacheBytes, 0, _cacheNum - nowIndex);
+                    _cacheNum = _cacheNum - nowIndex;
+                    break;
+                }
+            }
+        }
+        
+        /// <summary>
+        /// 解析消息体
+        /// </summary>
+        private BaseMsg MsgBytesHandle(int msgID, int nowIndex)
+        {
+            BaseMsg baseMsg = null;
+            switch (msgID)
+            {
+                case MsgId.HeartMsg:
+                    baseMsg = new HeartMsg();
+                    break;
+            }
+            return baseMsg;
+        }
+
+        // 分帧处理消息队列里的消息
+        private async UniTask MsgHandleAsync()
+        {
+            while (_socket != null && _socket.Connected)
+            {
+                if (_receiveQueue.Count > 0)
+                {
+                    BaseMsg baseMsg = _receiveQueue.Dequeue();
+                    
+                    switch (baseMsg)
+                    {
+                        
+                    }
+                }
+                await UniTask.Yield();
             }
         }
     }
