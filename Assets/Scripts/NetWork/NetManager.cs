@@ -87,7 +87,7 @@ namespace NetWork
         /// <summary>
         /// 发送消息异步
         /// </summary>
-        public void Send(BaseMsg msg)
+        public void Send(BaseMsg msg, Action action = null)
         {
             if (_socket != null && _socket.Connected)
             {
@@ -101,6 +101,10 @@ namespace NetWork
                     {
                         Debug.Log("send failed " + args.SocketError);
                         Close();
+                    }
+                    else
+                    {
+                        action?.Invoke();
                     }
                 };
                 
