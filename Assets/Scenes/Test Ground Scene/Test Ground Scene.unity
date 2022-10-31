@@ -1603,7 +1603,6 @@ MonoBehaviour:
   groundedDetector: {fileID: 747501542}
   walledDetector: {fileID: 589452617}
   playerWinEvent: {fileID: 11400000, guid: 1fe806fa6c3644f45ba2fe7f18322195, type: 2}
-  playerDefeatedEvent: {fileID: 11400000, guid: 54f98ae891f2d444ea8d455e56c9e11a, type: 2}
 --- !u!114 &139370792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10308,6 +10307,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 097532d5ed156374dab7997a81ec2fb1, type: 3}
   m_PrefabInstance: {fileID: 1455141807}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1468553566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1468553567}
+  m_Layer: 0
+  m_Name: CheatPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1468553567
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468553566}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 23.09, y: 35.51, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1471167899
 PrefabInstance:
   m_ObjectHideFlags: 0

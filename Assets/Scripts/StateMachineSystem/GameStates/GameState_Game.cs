@@ -23,17 +23,6 @@ public class GameState_Game : GameState
         UIManager.Instance.ShowPanel<ClearTimerPanel>(GlobalString.CLEARTIMER_PANEL);
     }
 
-    public override void LogicUpdate()
-    { 
-        // 作弊按钮，按 F1 通关
-        #if UNITY_EDITOR
-        if (Keyboard.current.f1Key.wasPressedThisFrame)
-        {
-            playerWinEvent.EventTrigger();
-        }
-        #endif
-    }
-
     public override void Exit()
     {
         playerDefeatedEvent.RemoveEventListener(OnPlayerWinEvent);

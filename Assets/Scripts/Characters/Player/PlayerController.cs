@@ -31,6 +31,17 @@ public class PlayerController : MonoBehaviour
     {
         playerWinEvent.AddEventListener(LevelWin);
     }
+    
+#if UNITY_EDITOR   // 作弊功能
+    private void Update()
+    {
+        if (Keyboard.current.f1Key.wasPressedThisFrame)
+        {
+            Vector3 cheatPosition = GameObject.Find("CheatPosition").transform.position;
+            this.transform.position = cheatPosition;
+        }
+    }
+#endif
 
     private void OnDisable()
     {
