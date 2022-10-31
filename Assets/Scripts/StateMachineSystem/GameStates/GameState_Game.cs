@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -10,13 +11,13 @@ public class GameState_Game : GameState
 
     [SerializeField] private EventCenterVoid comeBackEvent;   // 返回开始界面事件
 
-    public override void Enter()
+    public override async void Enter()
     {
         playerWinEvent.AddEventListener(OnPlayerWinEvent);
         playerDefeatedEvent.AddEventListener(OnPlayerDefeatedEvent);
         comeBackEvent.AddEventListener(OnComeBack);
         
-        SceneManager.LoadSceneAsync(GlobalString.GAME_SCENE);
+        await SceneManager.LoadSceneAsync(GlobalString.GAME_SCENE);
 
         UIManager.Instance.ShowPanel<ReadyPanel>(GlobalString.READY_PANEL);
         UIManager.Instance.ShowPanel<ClearTimerPanel>(GlobalString.CLEARTIMER_PANEL);

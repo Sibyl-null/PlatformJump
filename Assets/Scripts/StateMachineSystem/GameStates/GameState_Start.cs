@@ -1,4 +1,4 @@
-using System;
+using Cysharp.Threading.Tasks;
 using NetWork;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,7 +11,7 @@ public class GameState_Start : GameState
 
     [SerializeField] private EventCenterVoid enterGameEvent;
 
-    public override void Enter()
+    public override async void Enter()
     {
         enterGameEvent.AddEventListener(EnterGameEvent);
 
@@ -19,7 +19,7 @@ public class GameState_Start : GameState
         Scene startScene = SceneManager.GetSceneByName(GlobalString.START_SCENE);
         if (startScene != SceneManager.GetActiveScene())
         {
-            SceneManager.LoadSceneAsync(GlobalString.START_SCENE);
+            await SceneManager.LoadSceneAsync(GlobalString.START_SCENE);
         }
         
         UIManager.Instance.ShowPanel<StartPanel>(GlobalString.START_PANEL);
