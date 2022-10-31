@@ -14,7 +14,10 @@ public class DefeatPanel : BasePanel
         btnRetry.onClick.AddListener(() =>
         {
             SceneManager.LoadScene(GlobalString.GAME_SCENE);
+            
             UIManager.Instance.DestroyPanel(GlobalString.DEFEAT_PANEL);
+            UIManager.Instance.ShowPanel<ReadyPanel>(GlobalString.READY_PANEL);
+            UIManager.Instance.ShowPanel<ClearTimerPanel>(GlobalString.CLEARTIMER_PANEL);
         });
         
         btnBack.onClick.AddListener(() =>
