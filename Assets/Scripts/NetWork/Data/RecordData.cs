@@ -9,7 +9,7 @@ class RecordData : BaseData
 
     public override int GetBytesNum()
     {
-        return 4 + 4 + 4 + Encoding.UTF8.GetBytes(name).Length;
+        return 4 + 4 + Encoding.UTF8.GetBytes(name).Length;
     }
 
     public override int Reading(byte[] bytes, int beginIndex = 0)
