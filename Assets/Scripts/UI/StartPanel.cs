@@ -1,3 +1,4 @@
+using NetWork;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +18,11 @@ public class StartPanel : BasePanel
         
         btnRank.onClick.AddListener(() =>
         {
-            //TODO:
+            GetRankMsg msg = new GetRankMsg();
+            NetManager.Instance.Send(msg, () =>
+            {
+                Debug.Log("get rank");
+            });
         });
     }
 }

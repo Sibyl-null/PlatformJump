@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -15,8 +13,6 @@ namespace NetWork
         private byte[] _cacheBytes = new byte[1024];
         private int _cacheNum = 0;
 
-        private Queue<BaseMsg> _receiveQueue = new Queue<BaseMsg>();
-        
         //发送心跳消息的间隔时间
         private double SEND_HEART_MSG_TIME = 5;
         private HeartMsg hearMsg = new HeartMsg();
@@ -49,8 +45,7 @@ namespace NetWork
                 Debug.Log("connect success");
                 
                 SendHeartMsgAsync().Forget();    //开始发送心跳消息
-                MsgHandleAsync().Forget();    //开始分帧处理消息
-                
+
                 // 开始接受消息
                 SocketAsyncEventArgs receiveArgs = new SocketAsyncEventArgs();
                 receiveArgs.SetBuffer(_cacheBytes, 0, _cacheBytes.Length);
@@ -169,7 +164,6 @@ namespace NetWork
         // 处理分包，粘包
         private void HandleReceiveMsg(int receiveNum)
         {
-            Debug.Log("dadada");
             int msgID = 0;
             int msgLength = 0;
             int nowIndex = 0;
@@ -193,8 +187,8 @@ namespace NetWork
                 {
                     //解析消息体
                     BaseMsg baseMsg = MsgBytesHandle(msgID, nowIndex);
-                    
-                    if (baseMsg != null) _receiveQueue.Enqueue(baseMsg);
+
+                    if (baseMsg != null) MsgHandle(baseMsg);
                     
                     nowIndex += msgLength;
                     if (nowIndex == _cacheNum)
@@ -221,6 +215,10 @@ namespace NetWork
             BaseMsg baseMsg = null;
             switch (msgID)
             {
+                case MsgId.GiveRankMsg:
+                    baseMsg = new GiveRankMsg();
+                    baseMsg.Reading(_cacheBytes, nowIndex);
+                    break;
                 case MsgId.HeartMsg:
                     baseMsg = new HeartMsg();
                     break;
@@ -228,21 +226,14 @@ namespace NetWork
             return baseMsg;
         }
 
-        // 分帧处理消息队列里的消息
-        private async UniTask MsgHandleAsync()
+        // 处理消息队列里的消息
+        private void MsgHandle(BaseMsg baseMsg)
         {
-            while (_socket != null && _socket.Connected)
+            switch (baseMsg)
             {
-                if (_receiveQueue.Count > 0)
-                {
-                    BaseMsg baseMsg = _receiveQueue.Dequeue();
-                    
-                    switch (baseMsg)
-                    {
-                        
-                    }
-                }
-                await UniTask.Yield();
+                case GiveRankMsg msg:
+                    RecordRankModel.Instance.records = msg.records;
+                    break;
             }
         }
     }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-class RecordData : BaseData
+public class RecordData : BaseData
 {
     public string name;
     public int record;
