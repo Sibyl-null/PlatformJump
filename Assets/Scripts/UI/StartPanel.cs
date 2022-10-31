@@ -19,10 +19,9 @@ public class StartPanel : BasePanel
         btnRank.onClick.AddListener(() =>
         {
             GetRankMsg msg = new GetRankMsg();
-            NetManager.Instance.Send(msg, () =>
-            {
-                Debug.Log("get rank");
-            });
+            NetManager.Instance.SendNoAsync(msg);
+            UIManager.Instance.ShowPanel<RankPanel>(GlobalString.RANK_PANEL);
+            UIManager.Instance.HidePanel(GlobalString.START_PANEL);
         });
     }
 }
