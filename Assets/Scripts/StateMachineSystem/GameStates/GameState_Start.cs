@@ -21,7 +21,8 @@ public class GameState_Start : GameState
         {
             await SceneManager.LoadSceneAsync(GlobalString.START_SCENE);
         }
-        
+
+        UIManager.Instance.ShowPanel<DebugPanel>(GlobalString.DEBUG_PANEL);
         UIManager.Instance.ShowPanel<StartPanel>(GlobalString.START_PANEL);
         // 进入游戏尝试网络连接
         NetManager.Instance.Connect(ipAddress, port);

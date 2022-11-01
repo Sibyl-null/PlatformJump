@@ -25,4 +25,5 @@ public static class GlobalString
     public const string CLEARTIMER_PANEL = "UI/Panel/ClearTimerPanel";
     public const string DEFEAT_PANEL = "UI/Panel/DefeatPanel";
     public const string RANK_PANEL = "UI/Panel/RankPanel";
+    public const string DEBUG_PANEL = "UI/Panel/DebugPanel";
 }

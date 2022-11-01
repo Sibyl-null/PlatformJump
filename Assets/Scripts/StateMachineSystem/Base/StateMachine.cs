@@ -25,6 +25,10 @@ public class StateMachine : MonoBehaviour
     {
         _currentState = state;
         _currentState.Enter();
+        
+#if UNITY_EDITOR
+        DebugModel.Instance.Message.Value = "当前状态：" + _currentState.GetType().Name;
+#endif
     }
 
     /// <summary>
@@ -34,6 +38,10 @@ public class StateMachine : MonoBehaviour
     {
         _currentState.Exit();
         SwitchOn(state);
+
+#if UNITY_EDITOR
+        DebugModel.Instance.Message.Value = "当前状态：" + _currentState.GetType().Name;
+#endif
     }
 
     /// <summary>
